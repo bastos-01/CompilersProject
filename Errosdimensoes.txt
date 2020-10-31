@@ -1,0 +1,16 @@
+//Erro de letra minuscula 
+time -> real (s); 
+
+//erro de dimensão não criada;
+Velocidade -> Distancia/time; 
+
+//erro de unidade já existente na Dimension
+Distancia -> real(m);
+Distancia -> addUnit m = 100*m;
+
+//erro de unidade não existente para a conversão
+Distancia -> addUnit dm = 0.1 * cm;
+
+//erro de dimensão já criada
+Distancia -> real(m);
+

@@ -1,0 +1,7 @@
+Massa -> real (kg);
+Volume -> real (l);
+Densidade -> Massa/Volume;
+Massa -> addUnit g = 1000*kg;
+Capacidade -> Densidade*Massa;
+Temperature -> real (C);
+Temperature -> addUnit F = 1.8*C + 32;

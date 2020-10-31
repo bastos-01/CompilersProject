@@ -1,0 +1,53 @@
+import dimensoes1;
+import dimensoes2;
+
+//erro de dimensão não encontrada
+Teste t;
+
+//erro de valor real com uma dimensão integer
+Time t = 0.5 (s);
+
+//erro de print de variavel não existente
+println(d);
+
+//erro de comparação de tipos não numéricos
+string str = "teste";
+integer i = 9;
+if(str < 9){
+    println("entrou");
+};
+
+//erro de soma de valores não numéricos
+real r = i + str;
+
+//erro de comparação de boolean com número
+boolean b = false;
+if(i < b){
+    println("entrou");
+};
+
+//erro da expressão booleana do while
+while("ola"){
+    println("entrou");
+};
+
+//erro de falta da unidade em t < 3 (s)
+for(Time t = 0(s); t < 3; t++){
+    println("entrou");
+};
+
+//erro de expressão condicional
+for(t = 0(s); t == false; t++){
+    println("entrou");
+};
+
+//erro na expressão de incrementação
+for(t = 0(s); t < 3(s); false){
+    println("entrou");
+};
+
+
+//dimensão t tem tipo primitivo integer e 0.5 é real
+if(! (t == 0.5) ){
+    println("iguais");
+};

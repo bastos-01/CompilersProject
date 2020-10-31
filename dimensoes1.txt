@@ -1,0 +1,4 @@
+Length -> real (m); //criar a dimensão Distance tendo em conta que o tipo de dados associado é 'real' e a unidade 'm' de metro
+Time -> integer (s); //criar a dimensão Time tendo em conta que o tipo de dados associado é 'integer' e a unidade 's'
+Velocity -> Length/Time; // criar dimensão velocidade, o tipo de dados associado será m/s
+Length -> addUnit cm=100*m; 

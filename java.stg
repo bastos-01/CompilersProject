@@ -1,0 +1,152 @@
+booleanValue ::= [
+   "true":"true",
+   "false":"false",
+   default:"null"
+]
+
+typeValue ::= [
+   "integer":"int",
+   "real":"double",
+   "boolean":"boolean",
+   "string" : "String",
+   default:"null"
+]
+
+typeFormat ::= [
+   "integer":"",
+   "real":"",
+   "boolean":"",
+   "string":"",
+   default:"null"
+]
+inputValues ::= [
+   "integer":"sc.nextInt()",
+   "real" :  "sc.nextDouble()",
+   "string": "sc.nextLine()",
+   "default":"null"
+]
+
+powerTypeCast ::= [
+   "integer" : "(int)",
+   "real":"",
+   default:"null"
+]
+
+Operators ::= [
+    "*"  : "*",
+    "/"  : "/",
+    "%"  : "%" ,
+    "+"  : "+",
+    "-"  : "-",
+    "==" : "==",
+    "!=" : "!=",
+    ">"  : ">",
+    "<"  : "<",
+    "<=" : "<=",
+    ">=" : ">=",
+    "!"  : "!",
+    "&&" : "&&",
+    "||" : "||",
+    default    : "null"
+]
+
+
+
+
+incrementVar ::= [
+   "++" : "++",
+   "--" : "--"
+]
+
+
+
+
+module(name, stat) ::= <<
+import java.util.Scanner;
+public class <name> {
+    public static void main (String[] args) {
+        Scanner sc = new Scanner (System.in);
+        <stats(stat)>
+    }
+}
+>>
+
+
+
+//declare a variable and if theres a value assign it 
+decl(type, var, value,stat) ::= <<
+<stats(stat)>
+<typeValue.(type)> <var><if(value)> = <value><endif>;
+>>
+
+
+stats(stat) ::= <<
+<if(stat)><stat; separator="\n"><endif>
+>>
+
+assign(stat,var,value) ::= <<
+<stats(stat)>
+<var> = <value>;
+>>
+
+//increment variable
+inc(var, op) ::= "<var> <incrementVar.(op)>;"
+
+
+
+print(stat,expr) ::= <<
+<stats(stat)>
+System.out.println(<expr>);
+>>
+
+
+
+conditional(stat,expr, true_stat, false_stat) ::= <<
+<stats(stat)>
+if(<expr>) {
+    <true_stat>
+} <if(false_stat)>
+else {
+    <false_stat>
+}
+<endif>
+>>
+
+input(stat,var,prompt,type) ::= <<
+System.out.print(<prompt>);
+<decl(type,var,inputValues.(type),stat)>
+>>
+
+//in order to make for loops we can use the while
+
+conditionloop(statfor,statbefore,statafter,var,inc) ::= <<
+<if(statfor)> <stats(statfor)> <endif>
+while (true) {
+	<stats(statbefore)>
+	if (!<var>){
+	   break;
+   }   
+   <stats(statafter)>
+} 
+>>
+
+
+binaryExpression(stat,type,var,e1,op,e2) ::= <<
+<decl(type,var,[e1," ",Operators.(op)," ",e2],stat)>
+>>
+
+
+binaryOperator(type,var,e1,op) ::= "<typeValue.(type)> <var><if(e1)> = <op>(<e1>)<endif>;"
+
+negationExpression(type,var,e,op,stat) ::= "<decl(type,var,[Operators.(op),e],stat)>"
+
+equalExpression(type,var,e1,e2,stat)  ::= "<decl(type,var,[e1,\".equals(\",e2,\")\"],stat)>"
+notEqualExpression(type,var,e1,e2,stat) ::= "<decl(type,var,[\"!\",e1,\".equals(\",e2,\")\"],stat)>"
+powerExpression(type,var,e1,e2,stat) ::= "<decl(type,var,[powerTypeCast.(type),\"Math.pow(\",e1,\",\",e2,\")\"],stat)>"
+
+literalBoolean(value) ::= "<booleanValue.(value)>"
+
+
+
+
+
